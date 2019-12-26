@@ -1,6 +1,26 @@
 from matplotlib.animation import FuncAnimation
 
 
+class AnimSimple:
+    """
+    Produces an animated 2-D plot. Plots each point rather than all points
+    up until the ith point.
+    """
+
+    def __init__(self, fig, lines, x, y, **kwargs):
+
+        def _init():
+            lines.set_data([], [])
+            return lines,
+
+        def _animate(i):
+            lines.set_data(x[i], y[i])
+            return lines,
+
+        self.anim = FuncAnimation(fig, _animate, init_func=_init, blit=True,
+                                  **kwargs)
+
+
 class AnimPlot:
     '''Produces an animated 2-D plot.'''
 
@@ -14,13 +34,15 @@ class AnimPlot:
             lines.set_data(x[:plot_speed * i], y[:plot_speed * i])
             return lines,
 
-        self.anim = FuncAnimation(fig, _animate, init_func=_init, interval=1,
-                                  blit=True, **kwargs)
+        self.anim = FuncAnimation(fig, _animate, init_func=_init, blit=True,
+                                  **kwargs)
 
 
 class AnimPlot3D:
-    '''Produces an animated 3-D plot. Array shape must be (1, n, 3), where
-    n is the number of data points.'''
+    """
+    Produces an animated 3-D plot. Array shape must be (1, n, 3), where
+    n is the number of data points.
+    """
 
     def __init__(self, fig, ax, lines, points, array, plot_speed=10,
                  rotation_speed=0.0, **kwargs):

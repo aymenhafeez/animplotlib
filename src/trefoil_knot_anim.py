@@ -11,9 +11,15 @@ x = np.sin(phi) + 2 * np.sin(2 * phi)
 y = np.cos(phi) - 2 * np.cos(2 * phi)
 z = -np.sin(3 * phi)
 
-data = np.array([x, y, z])
-data_transpose = np.array([data]).T
-data_plot = np.reshape(data_transpose, (1, n, 3), order='C')
+
+def shape_data(x, y, z):
+    data = np.array([x, y, z])
+    data_transpose = np.array([data]).T
+    data_plot = np.reshape(data_transpose, (1, n, 3), order='C')
+    return data_plot
+
+
+array = shape_data(x, y, z)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -28,6 +34,6 @@ ax.set_ylim(-3, 3)
 ax.set_zlim(-1, 1)
 ax.set_axis_off()
 
-anim.AnimPlot3D(fig, ax, lines, points, data_plot, plot_speed=3,
+anim.AnimPlot3D(fig, ax, lines, points, array, plot_speed=3,
                 rotation_speed=0.36)
 plt.show()
