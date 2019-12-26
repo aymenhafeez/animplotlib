@@ -34,7 +34,7 @@ class AnimPlot:
             lines.set_data(x[:plot_speed * i], y[:plot_speed * i])
             return lines,
 
-        self.anim = FuncAnimation(fig, _animate, init_func=_init, blit=True,
+        self.anim = FuncAnimation(fig, _animate, init_func=_init, interval=1, blit=True,
                                   **kwargs)
 
 
