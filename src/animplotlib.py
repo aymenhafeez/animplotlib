@@ -1,5 +1,7 @@
 from matplotlib.animation import FuncAnimation
 
+# TODO: Merge AnimSimple and AnimPlot classes
+
 
 class AnimSimple:
     """
@@ -39,13 +41,32 @@ class AnimPlot:
 
 
 class AnimPlot3D:
+
+    # TODO: Add array reshape functionality to class
+    
     """
     Produces an animated 3-D plot. Array shape must be (1, n, 3), where
     n is the number of data points.
+
+    Parameters:
+    ===========
+    fig = matplotlib.pyplot.figure()
+    ax = axes
+    lines = [ax.plot([], [], [])]
+    points = [ax.plot([], [], [], 'o')]
+    array = (1, n, 3) array
+    plot_speed = Natural number 
+    rotation_speed = Natural number, proportional to plot_speed
+        ---> keep blit=False for this
+    l_num = Number of points plotted to lines each frame
+    p_num = Number of points plotted to points each frame
+    **kwargs = Other arguments passable into matplotlib.animation.FuncAnimation()
+
+    See examples to better understanding of how to use each parameter.
     """
 
     def __init__(self, fig, ax, lines, points, array, plot_speed=10,
-                 rotation_speed=0.0, **kwargs):
+                 rotation_speed=0.0, l_num=0, p_num=-1, **kwargs):
 
         def _init():
             for self.line, self.point in zip(lines, points):
@@ -61,11 +82,11 @@ class AnimPlot3D:
 
             for self.line, self.point, self.data in zip(lines, points, array):
                 self.x, self.y, self.z = self.data[:i].T
-                self.line.set_data(self.x, self.y)
-                self.line.set_3d_properties(self.z)
+                self.line.set_data(self.x[-l_num:], self.y[-l_num:])
+                self.line.set_3d_properties(self.z[-l_num:])
 
-                self.point.set_data(self.x[-1:], self.y[-1:])
-                self.point.set_3d_properties(self.z[-1:])
+                self.point.set_data(self.x[-p_num:], self.y[-p_num:])
+                self.point.set_3d_properties(self.z[-p_num:])
 
             ax.view_init(30, rotation_speed * i)
             fig.canvas.draw()

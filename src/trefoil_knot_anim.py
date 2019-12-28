@@ -35,5 +35,5 @@ ax.set_zlim(-1, 1)
 ax.set_axis_off()
 
 anim.AnimPlot3D(fig, ax, lines, points, array, plot_speed=3,
-                rotation_speed=0.36)
+                rotation_speed=0.36, p_num=1)
 plt.show()
