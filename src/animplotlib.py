@@ -62,7 +62,7 @@ class AnimPlot3D:
     p_num = Number of points plotted to points each frame
     **kwargs = Other arguments passable into matplotlib.animation.FuncAnimation()
 
-    See examples to better understanding of how to use each parameter.
+    See examples to better understand how to use each parameter.
     """
 
     def __init__(self, fig, ax, lines, points, array, plot_speed=10,
