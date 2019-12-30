@@ -35,7 +35,7 @@ z = x_solve[0, :, 2]
 fig = plt.figure(figsize=(5, 5))
 ax = fig.add_subplot(111, projection='3d')
 
-lines, = [ax.plot([], [], [], lw=0.15)]
+lines, = [ax.plot([], [], [], lw=0.25)]
 points, = [ax.plot([], [], [], 'o', markerfacecolor='None', markersize=4.5,
                    markeredgewidth=0.25)]
 
@@ -44,10 +44,7 @@ ax.set_ylim((-45, 45))
 ax.set_zlim((15, 85))
 ax.set_axis_off()
 
-anim.AnimPlot3D(fig, ax, lines, points, x_solve, plot_speed=7,
+anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=7,
                 rotation_speed=0.1, p_num=1)
-ax.plot(x, y, z, lw=0.15, alpha=0.15)
-
-ax.set_axis_off()
 
 plt.show()

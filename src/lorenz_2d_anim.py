@@ -32,9 +32,9 @@ z = x_solve[:, 2]
 
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(13, 3))
 
-line1, = ax1.plot([], [], c='#FF7F0E', lw=0.1)
-line2, = ax2.plot([], [], c='#44C6A3', lw=0.1)
-line3, = ax3.plot([], [], c='#F73F3F', lw=0.1)
+line1, = ax1.plot([], [], c='yellow', lw=0.15)
+line2, = ax2.plot([], [], c='teal', lw=0.15)
+line3, = ax3.plot([], [], c='orange', lw=0.15)
 
 xlim = (-25, 25)
 ylim = (-25, 25)
