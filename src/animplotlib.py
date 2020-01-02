@@ -9,7 +9,6 @@ class AnimPlot:
     Parameters
     ==========
     fig        : matplotlib figure
-    ax         : matplotlib axes
     lines      : empty matplotlib plot
     x, y       : points being plotted
     trail      : if True, all points up to the ith point are plotted each frame
