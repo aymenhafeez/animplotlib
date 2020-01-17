@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.cfg
+setup.py
+animplotlib/__init__.py
+animplotlib/animplotlib.py
+animplotlib.egg-info/PKG-INFO
+animplotlib.egg-info/SOURCES.txt
+animplotlib.egg-info/dependency_links.txt
+animplotlib.egg-info/requires.txt
+animplotlib.egg-info/top_level.txt

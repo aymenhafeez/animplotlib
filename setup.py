@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='animplotlib',
-    version='0.1.1',
+    version='0.1.3',
     author='Aymen Hafeez',
     author_email='aymennh@gmail.com',
     packages=['animplotlib',],
@@ -13,6 +13,7 @@ setup(
     license='MIT',
     description='A thin wrapper around the matplotlib FuncAnimation class',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     python_requires='>=3.5',
     install_requires=["matplotlib >= 1.1"],
 )
