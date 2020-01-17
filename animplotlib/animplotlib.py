@@ -36,11 +36,10 @@ class AnimPlot:
 
         if trail == True:
             animation = FuncAnimation(fig, _animate, init_func=_init,
-                                           interval=1, blit=True, **kwargs)
+                                      interval=1, blit=True, **kwargs)
         else:
             animation = FuncAnimation(fig, _animate_single_point,
-                                           init_func=_init, blit=True,
-                                           **kwargs)
+                                      init_func=_init, blit=True, **kwargs)
 
 
 class AnimPlot3D:
@@ -64,7 +63,7 @@ class AnimPlot3D:
                      matplotlib.animation.FuncAnimation()
     """
     def __init__(self, fig, ax, lines, points, x, y, z, plot_speed=10,
-                 rotation_speed=0.0, l_num=0, p_num=-1, **kwargs):
+                 rotation_speed=0.0, l_num=0, p_num=1, **kwargs):
 
         def _init():
             for self.line, self.point in zip(lines, points):
