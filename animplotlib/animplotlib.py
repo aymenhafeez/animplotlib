@@ -10,7 +10,7 @@ class AnimPlot:
     ==========
     fig        : matplotlib figure
     lines      : empty matplotlib plot
-    x, y       : points being plotted
+    x, y       : list; points being plotted
     trail      : if True, all points up to the ith point are plotted each frame
                  if False, only the ith point is plotted each frame
     plot_speed : int
@@ -63,7 +63,7 @@ class AnimPlot3D:
                      matplotlib.animation.FuncAnimation()
     """
     def __init__(self, fig, ax, lines, points, x, y, z, plot_speed=10,
-                 rotation_speed=0.0, l_num=0, p_num=1, **kwargs):
+                 rotation_speed=0.0, l_num=0, p_num=1, blit=True, **kwargs):
 
         def _init():
             for self.line, self.point in zip(lines, points):
@@ -92,9 +92,13 @@ class AnimPlot3D:
                 self.point.set_data(self.x[-p_num:], self.y[-p_num:])
                 self.point.set_3d_properties(self.z[-p_num:])
 
-            ax.view_init(30, rotation_speed * i)
-            fig.canvas.draw()
+            if rotation_speed != 0:
+                ax.view_init(30, rotation_speed * i)
+                fig.canvas.draw()
+            else:
+                pass
+
             return lines + points
 
         self.anim = FuncAnimation(fig, _animate, init_func=_init, interval=1,
-                                  **kwargs)
+                                  blit=blit, **kwargs)
