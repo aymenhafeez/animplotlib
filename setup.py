@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='animplotlib',
-    version='0.1.3',
+    version='0.1.4',
     author='Aymen Hafeez',
     author_email='aymennh@gmail.com',
     packages=['animplotlib',],
