@@ -1,4 +1,4 @@
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation, PillowWriter
 import numpy as np
 
 
@@ -62,8 +62,9 @@ class AnimPlot3D:
     **kwargs       : other arguments passable into
                      matplotlib.animation.FuncAnimation()
     """
-    def __init__(self, fig, ax, lines, points, x, y, z, plot_speed=10,
-                 rotation_speed=0.0, l_num=0, p_num=1, blit=True, **kwargs):
+    def __init__(self, fig, ax, lines, points, x, y, z, plot_speed=10, 
+                 rotation_speed=0, l_num=0, p_num=1, save_as=None,
+                 blit=True, **kwargs):
 
         def _init():
             for self.line, self.point in zip(lines, points):
@@ -100,5 +101,10 @@ class AnimPlot3D:
 
             return lines + points
 
-        self.anim = FuncAnimation(fig, _animate, init_func=_init, interval=1,
-                                  blit=blit, **kwargs)
+        anim = FuncAnimation(fig, _animate, init_func=_init, interval=1,
+                             blit=blit, **kwargs)
+
+        if save_as is not None:
+            anim.save(save_as + '.gif', writer=PillowWriter(fps=60))
+        else:
+            pass
