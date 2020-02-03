@@ -17,7 +17,8 @@ class AnimPlot:
     **kwargs   : other arguments passable into
                  matplotlib.animation.FuncAnimation()
     """
-    def __init__(self, fig, lines, x, y, trail=True, plot_speed=10, **kwargs):
+    def __init__(self, fig, lines, x, y, trail=True, plot_speed=10,
+                 save_as=None, **kwargs):
 
         def _init():
             lines.set_data([], [])
@@ -35,11 +36,16 @@ class AnimPlot:
             return lines,
 
         if trail == True:
-            animation = FuncAnimation(fig, _animate, init_func=_init,
-                                      interval=1, blit=True, **kwargs)
+            anim = FuncAnimation(fig, _animate, init_func=_init,
+                                 interval=1, blit=True, **kwargs)
         else:
-            animation = FuncAnimation(fig, _animate_single_point,
-                                      init_func=_init, blit=True, **kwargs)
+            anim = FuncAnimation(fig, _animate_single_point,
+                                 init_func=_init, blit=True, **kwargs)
+
+        if save_as is not None:
+            anim.save(save_as + '.gif', writer=PillowWriter(fps=60))
+        else:
+            pass
 
 
 class AnimPlot3D:
