@@ -130,6 +130,8 @@ default, all the points up until the current point get plotted.
 * `p_num` (`int`) : The number of points being plotted to `points` each frame. By
 default, this is set to 1, i.e. only the current most point is plotted each
 frame (the orange point in the gif).
+* `save_as` (`str`) : file name to save the animation as a gif in the
+  current working directory.
 * `**kwargs` : other arguments passable into
 `matplotlib.animation.FuncAnimation` (see [the
 docs](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.animation.FuncAnimation.html)
