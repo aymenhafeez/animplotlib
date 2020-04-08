@@ -1,0 +1,16 @@
+*.ipynb*
+.ipynb_checkpoints
+.python-version
+.*.swp
+__pycache__/
+
+.venv
+env/
+venv/
+
+*.egg-info/
+*.egg
+.eggs/
+.eggs/
+build/
+dist/
