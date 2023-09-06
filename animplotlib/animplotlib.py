@@ -21,6 +21,10 @@ class AnimPlot:
     """
     def __init__(self, fig, lines, x, y, trail=True, plot_speed=10,
                  save_as=None, **kwargs):
+        self.x = x
+        self.y = y
+        self.plot_speed = plot_speed
+        self.lines = lines
 
         def _init():
             lines.set_data([], [])
@@ -30,8 +34,10 @@ class AnimPlot:
             raise ValueError('x and y must be the same size.')
 
         def _animate(i):
-            lines.set_data(x[:plot_speed * i], y[:plot_speed * i])
-            return lines,
+            start_idx = 0
+            end_idx = min(self.plot_speed * (i + 1), len(self.x))
+            self.lines.set_data(self.x[:end_idx], self.y[:end_idx])
+            return self.lines,
 
         def _animate_single_point(i):
             lines.set_data(x[plot_speed * i], y[plot_speed * i])
