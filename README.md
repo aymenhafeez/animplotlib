@@ -1,4 +1,7 @@
 # animplotlib
+
+IMPORTANT: CURRENTLY NOT WORKING AND UNDERGOING FIXES - DO NOT USE AFTER fa062c7 COMMIT
+
 This package acts as a thin wrapper around the
 `matplotlib.animation.FuncAnimation` class to simplify animating `matplotlib`
 plots.
