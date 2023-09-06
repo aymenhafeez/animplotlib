@@ -30,7 +30,7 @@ class AnimPlot:
             lines.set_data([], [])
             return lines,
 
-        if len(x) != len(y):
+        if len(self.x) != len(self.y):
             raise ValueError('x and y must be the same size.')
 
         def _animate(i):
@@ -40,15 +40,15 @@ class AnimPlot:
             return self.lines,
 
         def _animate_single_point(i):
-            lines.set_data(x[plot_speed * i], y[plot_speed * i])
+            lines.set_data(self.x[plot_speed * i], self.y[plot_speed * i])
             return lines,
 
         if trail is True:
-            anim = FuncAnimation(fig, _animate, init_func=_init,
+            anim = FuncAnimation(fig, _animate, init_func=_init, frames=len(x)//plot_speed,
                                  interval=1, blit=True, **kwargs)
         else:
             anim = FuncAnimation(fig, _animate_single_point,
-                                 init_func=_init, blit=True, **kwargs)
+                                 init_func=_init, frames=len(x)//plot_speed, blit=True, **kwargs)
 
         if save_as is not None:
             anim.save(save_as + '.gif', writer=PillowWriter(fps=60))
