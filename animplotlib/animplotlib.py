@@ -63,19 +63,22 @@ class AnimPlot:
         self.y = y
         self.plot_speed = plot_speed
         self.lines = lines
+        self.fig = fig
+        
+    def _init(self):
+        self.lines.set_data([], [])
+        return self.lines,
 
-        def _init():
-            self.lines.set_data([], [])
-            return self.lines,
+    def _animate(self, i):
+        start_idx = 0
+        end_idx = min(self.plot_speed * (i + 1), len(self.x))
+        self.lines.set_data(self.x[:end_idx], self.y[:end_idx])
+        return self.lines,
 
-        def _animate(i):
-            start_idx = 0
-            end_idx = min(self.plot_speed * (i + 1), len(self.x))
-            self.lines.set_data(self.x[:end_idx], self.y[:end_idx])
-            return self.lines,
 
-        anim = FuncAnimation(fig, _animate, init_func=_init, frames=len(x)//plot_speed,
-                             interval=1, blit=True)
+    def do_animation(self, save_as):
+        anim = FuncAnimation(self.fig, self._animate, init_func=self._init, frames=len(self.x)//self.plot_speed,
+                                interval=1, blit=True)
 
         if save_as is not None:
             anim.save(save_as + '.gif', writer=PillowWriter(fps=60))
