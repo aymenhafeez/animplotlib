@@ -1,7 +1,5 @@
 # animplotlib
 
-IMPORTANT: CURRENTLY NOT WORKING AND UNDERGOING FIXES - DO NOT USE AFTER fa062c7 COMMIT
-
 This package acts as a thin wrapper around the
 `matplotlib.animation.FuncAnimation` class to simplify animating `matplotlib`
 plots.
@@ -27,12 +25,12 @@ basic plot of an Euler spiral. An Euler spiral can be obtained by plotting
 the [Fresnel integrals](https://en.wikipedia.org/wiki/Fresnel_integral),
 which can be generated using `scipy.special`.
 
-Import the necessary libraries and create a matplotlib figure and axes:
+Import the necessary libraries and create a `matplotlib` figure and axes:
 
 ```python
 import animplotlib as anim
 import numpy as np
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 import scipy.special as sc
 
 fig = plt.figure()
@@ -76,12 +74,12 @@ Optional arguments:
 ### AnimPlot3D
 
 Creating a 3-D animated plot is similar to creating a 2-D plot but with a
-few additions.
+few additional steps.
 
 ```python
 import animplotlib as anim
+import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D  # for 3-D matplotlib plots
 import scipy.special as sc
 
 fig = plt.figure()
@@ -91,33 +89,22 @@ x = np.linspace(-10, 10, 3000)
 y, z = sc.fresnel(x)
 ```
 
-For 3-D plots, two empty `matplotlib`, each contained within a list, must
-be created:
+For 3-D plots, two empty `matplotlib` plots must be created:
 
 ```python
 lines, = [ax.plot([], [], [])]
 points, = [ax.plot([], [], [], 'o')]
 ```
 
-The second plot, `points`, by default plots the 'ith' point each frame.
+The second plot, `points`, by default plots the 'ith' point each frame. After
+that set the x, y and z limits and call the `AnimPlot3D` class.
 
 ```python
 ax.set_xlim(-10, 10)
 ax.set_ylim(-1, 1)
 ax.set_zlim(-1, 1)
 
-# make the axes look a bit cleaner
-ax.xaxis.pane.fill = False
-ax.yaxis.pane.fill = False
-ax.zaxis.pane.fill = False
-
-ax.xaxis.pane.set_edgecolor('w')
-ax.yaxis.pane.set_edgecolor('w')
-ax.zaxis.pane.set_edgecolor('w')
-
-ax.grid(False)
-
-anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=5)
+animation = anim.AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
 plt.show()
 ```
 
@@ -139,3 +126,6 @@ frame (the orange point in the gif).
 `matplotlib.animation.FuncAnimation` (see [the
 docs](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.animation.FuncAnimation.html)
 for more info).
+
+Both the 2-D and 3-D plots can be customised visually the same way you would
+a normal `matplotlib` plot.
