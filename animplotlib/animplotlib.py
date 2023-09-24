@@ -20,7 +20,7 @@ class AnimPlot:
     **kwargs   : other arguments passable into
                  matplotlib.animation.FuncAnimation()
     """
-    def __init__(self, fig, lines, x, y, plot_speed=10, save_as=None):
+    def __init__(self, fig, lines, x, y, plot_speed=10, save_as=None, **kwargs):
         self.x = x
         self.y = y
         self.plot_speed = plot_speed
@@ -37,7 +37,7 @@ class AnimPlot:
             return self.lines,
 
         anim = FuncAnimation(fig, _animate, init_func=_init, frames=len(x)//plot_speed,
-                             interval=1, blit=True)
+                             interval=1, blit=True, **kwargs)
 
         if save_as is not None:
             anim.save(save_as + '.gif', writer=PillowWriter(fps=60))
