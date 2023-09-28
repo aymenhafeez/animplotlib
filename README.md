@@ -69,7 +69,13 @@ Optional arguments:
 * `**kwargs` : other arguments passable into
 `matplotlib.animation.FuncAnimation` (see [the docs](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.animation.FuncAnimation.html) for more info).
 
-![](examples/gifs/fresnel_2d.gif =450x331)
+<!-- ![](examples/gifs/fresnel_2d.gif =450x331) -->
+
+<center>
+  <figure> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/master/examples/gifs/fresnel_2d.gif" height='331' width='450' /> 
+  </figure>
+</center>
 
 ### AnimPlot3D
 
@@ -108,8 +114,13 @@ animation = anim.AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
 plt.show()
 ```
 
-![](examples/gifs/fresnel_3d.gif =450x402)
+<!-- ![](examples/gifs/fresnel_3d.gif =450x402) -->
 
+<center>
+  <figure> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/master/examples/gifs/fresnel_3d.gif" height='402' width='450' /> 
+  </figure>
+</center>
 
 Optional arguments:
 * `plot_speed` (`int`) : set to 10 by default.
