@@ -69,7 +69,7 @@ Optional arguments:
 * `**kwargs` : other arguments passable into
 `matplotlib.animation.FuncAnimation` (see [the docs](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.animation.FuncAnimation.html) for more info).
 
-![](examples/gifs/fresnel_2d.gif)
+![](examples/gifs/fresnel_2d.gif =450x331)
 
 ### AnimPlot3D
 
@@ -108,7 +108,7 @@ animation = anim.AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
 plt.show()
 ```
 
-![](examples/gifs/fresnel_3d.gif)
+![](examples/gifs/fresnel_3d.gif =450x402)
 
 
 Optional arguments:
