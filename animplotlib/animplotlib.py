@@ -10,33 +10,42 @@ class AnimPlot:
     Parameters
     ==========
     fig        : matplotlib figure
-    lines      : empty matplotlib plot to plot all points up to the current point
-    points     : empty matplotlib plot to plot the current most point
+    line      : empty matplotlib plot to plot all points up to the current point
+    point     : empty matplotlib plot to plot the current most point
     x, y       : list; points being plotted
     plot_speed : int
+    l_num          : int; number of points plotted to 'line' each frame
+    p_num          : int; number of points plotted to 'point' each frame
     save_as    : str; file name to save animation as gif to current working
                  directory
     **kwargs   : other arguments passable into
                  matplotlib.animation.FuncAnimation()
     """
-    def __init__(self, fig, line, point, x, y, plot_speed=10, save_as=None, **kwargs):
+    def __init__(self, fig, line, point, x, y, plot_speed=10, l_num=1,
+                  p_num=1, save_as=None, **kwargs):
         self.x = x
         self.y = y
         self.plot_speed = plot_speed
         self.line = line
         self.point = point
+        self.l_num = l_num
+        self.p_num = p_num
 
         def _init():
-            self.line.set_data([], [])
-            self.point.set_data([], [])
-            return self.line, self.point,
+            trailing_x, trailing_y  = np.array([]), np.array([])
+            current_x, current_y  = np.array([]), np.array([])
+
+            self.line.set_data(trailing_x, trailing_y)
+            self.point.set_data(current_x, current_y)
+
+            return self.line, self.point
 
         def _animate(i):
             end_idx = min(self.plot_speed * (i + 1), len(self.x))
-            trailing_x = self.x[:end_idx]
-            trailing_y = self.y[:end_idx]
-            current_x = self.x[end_idx - 1]
-            current_y = self.y[end_idx - 1]
+            trailing_x = self.x[max(0, end_idx - self.l_num):end_idx]
+            trailing_y = self.y[max(0, end_idx - self.l_num):end_idx]
+            current_x = self.x[end_idx - self.p_num:end_idx]
+            current_y = self.y[end_idx - self.p_num:end_idx]
 
             self.line.set_data(trailing_x, trailing_y)
             self.point.set_data(current_x, current_y)

@@ -58,12 +58,24 @@ ax.set_ylim(-1, 1)
 Call the `AnimPlot` class and show the plot:
 
 ```python
-animation = anim.AnimPlot(fig, line, point, y, z)
+animation = anim.AnimPlot(fig, line, point, y, z, l_num=len(x),
+                          plot_speed=5)
 plt.show()
 ```
 
+`l_num` is the number of points before the current most point being plotted to
+`line`. The default value is set to 10, however in this example it makes sense
+to set it to the same length as `x` (i.e. all the points before the current most
+point are plotted). Similarly, an argument `p_num` can be passed to determine
+the number of points being plotted to `point`. This is set to 1 by default.
+
 Optional arguments:
 * `plot_speed` (`int`) : set to 10 by default.
+* `l_num` (`int`) : The number of points being plotted to `line` each frame. By
+default this is set to 10.
+* `p_num` (`int`) : The number of points being plotted to `point` each frame. By
+default, this is set to 1, i.e. only the current most point is plotted each
+frame (the orange point in the gif).
 * `save_as` (`str`) : file name to save the animation as a gif in the
   current working directory.
 * `**kwargs` : other arguments passable into
