@@ -44,25 +44,25 @@ x = np.linspace(-10, 10, 2500)
 y, z = sc.fresnel(x)
 ```
 
-Create an empty `matplotlib` plot and set x and y limits:
+Create two empty `matplotlib` plots: one to plot the points up to the current
+most point (i.e. the 'line') and one to plot the current most point:
 
 ```python
-lines, = ax.plot([], [], lw=1)
+line, = ax.plot([], [], lw=1)
+point, = ax.plot([], [], 'o')
 
 ax.set_xlim(-1, 1)
 ax.set_ylim(-1, 1)
 ```
  
-Call the `AnimPlot` class:
+Call the `AnimPlot` class and show the plot:
 
 ```python
-anim.AnimPlot(fig, lines, y, z)
+animation = anim.AnimPlot(fig, line, point, y, z)
 plt.show()
 ```
 
 Optional arguments:
-* `trail` (`bool`) :  set to `True` by default. If `False` only the 'ith'
-  point is plotted each frame.
 * `plot_speed` (`int`) : set to 10 by default.
 * `save_as` (`str`) : file name to save the animation as a gif in the
   current working directory.

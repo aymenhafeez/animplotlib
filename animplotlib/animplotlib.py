@@ -10,31 +10,38 @@ class AnimPlot:
     Parameters
     ==========
     fig        : matplotlib figure
-    lines      : empty matplotlib plot
+    lines      : empty matplotlib plot to plot all points up to the current point
+    points     : empty matplotlib plot to plot the current most point
     x, y       : list; points being plotted
-    trail      : if True, all points up to the ith point are plotted each frame
-                 if False, only the ith point is plotted each frame
     plot_speed : int
     save_as    : str; file name to save animation as gif to current working
                  directory
     **kwargs   : other arguments passable into
                  matplotlib.animation.FuncAnimation()
     """
-    def __init__(self, fig, lines, x, y, plot_speed=10, save_as=None, **kwargs):
+    def __init__(self, fig, line, point, x, y, plot_speed=10, save_as=None, **kwargs):
         self.x = x
         self.y = y
         self.plot_speed = plot_speed
-        self.lines = lines
+        self.line = line
+        self.point = point
 
         def _init():
-            self.lines.set_data([], [])
-            return self.lines,
+            self.line.set_data([], [])
+            self.point.set_data([], [])
+            return self.line, self.point,
 
         def _animate(i):
-            start_idx = 0
             end_idx = min(self.plot_speed * (i + 1), len(self.x))
-            self.lines.set_data(self.x[:end_idx], self.y[:end_idx])
-            return self.lines,
+            trailing_x = self.x[:end_idx]
+            trailing_y = self.y[:end_idx]
+            current_x = self.x[end_idx - 1]
+            current_y = self.y[end_idx - 1]
+
+            self.line.set_data(trailing_x, trailing_y)
+            self.point.set_data(current_x, current_y)
+
+            return self.line, self.point
 
         anim = FuncAnimation(fig, _animate, init_func=_init, frames=len(x)//plot_speed,
                              interval=1, blit=True, **kwargs)
