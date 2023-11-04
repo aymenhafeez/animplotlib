@@ -85,7 +85,7 @@ frame (the orange point in the gif).
 
 <center>
   <figure> 
-    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/master/examples/gifs/fresnel_1.gif" height='331' width='450' /> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/master/examples/gifs/fresnel_2.gif" height='331' width='450' /> 
   </figure>
 </center>
 
