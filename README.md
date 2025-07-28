@@ -122,7 +122,7 @@ ax.set_xlim(-10, 10)
 ax.set_ylim(-1, 1)
 ax.set_zlim(-1, 1)
 
-animation = anim.AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
+animation = anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=5)
 plt.show()
 ```
 
