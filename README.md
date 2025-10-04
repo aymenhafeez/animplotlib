@@ -13,7 +13,7 @@ pip install animplotlib
 ```
 
 
-## User manual  
+## User manual
 
 There are two classes which can be called: `AnimPlot`, for 2-D plots,
 and `AnimPlot3D`, for 3-D plots.
