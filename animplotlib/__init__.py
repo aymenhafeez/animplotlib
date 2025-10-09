@@ -1,2 +1,2 @@
-from .animplotlib import AnimPlot
-from .animplotlib import AnimPlot3D
+from .animplot import AnimPlot
+from .animplot3d import AnimPlot3D

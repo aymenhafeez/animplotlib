@@ -1,49 +1,35 @@
-import matplotlib
-matplotlib.use("QtAgg")
-import animplotlib as anim
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+import animplotlib as anim
 
 sigma = 10
-rho = 50
+rho = 28
 beta = 8/3
-x0 = [0, 1, 20]
-t_s, t_m = 0, 75
-t = np.linspace(t_s, t_m, 15000)
-
+x0 = [0, 1, 15]
+t = np.linspace(0.01, 50, 10000)
 
 def lorenz(x_var, t):
-    x = x_var[0]
-    y = x_var[1]
-    z = x_var[2]
-
+    x, y, z = x_var
     dx_dt = sigma * (y - x)
     dy_dt = x * (rho - z) - y
     dz_dt = x * y - beta * z
-
     return [dx_dt, dy_dt, dz_dt]
 
-
-x_solve = np.array([odeint(lorenz, x0, t)])
-
-x = x_solve[0, :, 0]
-y = x_solve[0, :, 1]
-z = x_solve[0, :, 2]
+x_solve = odeint(lorenz, x0, t)
+x = x_solve[:, 0]
+y = x_solve[:, 1]
+z = x_solve[:, 2]
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-lines, = [ax.plot([], [], [], lw=0.5)]
-points, = [ax.plot([], [], [], 'o', markersize=4.5,)]
-
-ax.set_xlim((-25, 25))
-ax.set_ylim((-45, 45))
-ax.set_zlim((15, 85))
+lines, = ax.plot([], [], [], lw=0.5)
+points, = ax.plot([], [], [], 'ro', markersize=4)
+ax.set_title("Lorenz Attractor")
 ax.set_axis_off()
+ax.set_xlim(np.min(x), np.max(x))
+ax.set_ylim(np.min(y), np.max(y))
+ax.set_zlim(np.min(z), np.max(z))
 
-anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=2,
-                rotation_speed=0.1, p_num=1, cache_frame_data=False)
-
-plt.show()
+anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=1, rotation_speed=0.1)

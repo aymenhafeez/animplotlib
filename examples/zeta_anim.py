@@ -21,5 +21,4 @@ ax.set_xlim(-2, 5)
 ax.set_ylim(-3, 3)
 ax.set_axis_off()
 
-animation = anim.AnimPlot(fig, line, point, x, y, plot_speed=1)
-plt.show()
+anim.AnimPlot(fig, line, point, x, y, plot_speed=1)

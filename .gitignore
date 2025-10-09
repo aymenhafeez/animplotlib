@@ -3,6 +3,7 @@
 .python-version
 .*.swp
 .DS_Store
+.vscode/
 __pycache__/
 
 .venv
