@@ -50,7 +50,13 @@ ax.set_title("Animated 2D Fresnel Plot")
 anim.AnimPlot(fig, line, point, y, z, plot_speed=2, l_num=len(x))
 ```
 
-![](examples/gifs/fresnel_2d.gif)
+<!-- ![](examples/gifs/fresnel_2d.gif) -->
+
+<center>
+  <figure> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/lorenz_colour.gif" width="400" /> 
+  </figure>
+</center>
 
 ### Basic 3D animation example
 
