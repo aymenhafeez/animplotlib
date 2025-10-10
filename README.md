@@ -4,7 +4,13 @@ This package acts as a thin wrapper around the
 `matplotlib.animation.FuncAnimation` class to simplify animating `matplotlib`
 plots.
 
-![](examples/gifs/trefoil-knot.gif)
+<!-- ![](examples/gifs/trefoil-knot.gif) -->
+
+<center>
+  <figure> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/lorenz_colour.gif" /> 
+  </figure>
+</center>
 
 ## Features
 
