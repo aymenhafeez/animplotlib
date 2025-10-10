@@ -6,7 +6,7 @@ plots.
 
 <center>
   <figure> 
-    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/lorenz_colour.gif" /> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/lorenz_colour.gif" width="500"/> 
   </figure>
 </center>
 
