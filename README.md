@@ -4,8 +4,6 @@ This package acts as a thin wrapper around the
 `matplotlib.animation.FuncAnimation` class to simplify animating `matplotlib`
 plots.
 
-<!-- ![](examples/gifs/trefoil-knot.gif) -->
-
 <center>
   <figure> 
     <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/lorenz_colour.gif" /> 
@@ -49,9 +47,6 @@ ax.set_title("Animated 2D Fresnel Plot")
 
 anim.AnimPlot(fig, line, point, y, z, plot_speed=2, l_num=len(x))
 ```
-
-<!-- ![](examples/gifs/fresnel_2d.gif) -->
-
 <center>
   <figure> 
     <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/fresnel_2d.gif" width="400" /> 
@@ -89,13 +84,16 @@ ax.set_axis_off()
 
 anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=1, rotation_speed=0.36, p_num=1)
 ```
-
-![](examples/gifs/trefoil-knot.gif)
+<center>
+  <figure> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/trefoil-knot.gif" width="400" /> 
+  </figure>
+</center>
 
 ## Documentation
 
 - [API Reference](https://github.com/aymenhafeez/animplotlib/blob/master/docs/API.md)
-- [Examples](https://github.com/aymenhafeez/animplotlib/tree/master/examples)
+- [Advanced examples](https://aymenhafeez.github.io/animplotlib/)
 
 ## License
 
