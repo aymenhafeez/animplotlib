@@ -56,37 +56,33 @@ anim.AnimPlot(fig, line, point, y, z, plot_speed=2, l_num=len(x))
 ### Basic 3D animation example
 
 ```python
-# 3D animated plot of a trefoil knot
+# 3D animated plot of the fresnel integral
 import numpy as np
 import matplotlib.pyplot as plt
-import animplotlib as anim
+import scipy.special as sc
+from animplot3d import AnimPlot3D
 
-n = 1000
-phi = np.linspace(0, 2 * np.pi, n)
-x = np.sin(phi) + 2 * np.sin(2 * phi)
-y = np.cos(phi) - 2 * np.cos(2 * phi)
-z = -np.sin(3 * phi)
+# generate fresnel data
+x = np.linspace(-7, 7, 1000)
+y, z = sc.fresnel(x)
 
+# create figure and axes - projection='3d' for 3D plots
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-
-# linewidth set to 0 to hide the line being animated
-lines, = ax.plot([], [], [], lw=0)
-points, = ax.plot([], [], [], 'o', markersize=10, markerfacecolor='None',)
-
-# static plit of the full trefoil knot in the background
-ax.plot(x, y, z, c='lightblue')
+# line and points to add the data to - three empty lists for 3D data
+lines, = ax.plot([], [], [], lw=1)
+points, = ax.plot([], [], [], 'ro', markersize=5)
 
 ax.set_xlim(np.min(x), np.max(x))
 ax.set_ylim(np.min(y), np.max(y))
 ax.set_zlim(np.min(z), np.max(z))
-ax.set_axis_off()
+ax.set_title("Animated 3D Fresnel Plot")
 
-anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=1, rotation_speed=0.36, p_num=1)
+AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
 ```
 <center>
   <figure> 
-    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/trefoil-knot.gif" width="400" /> 
+    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/fresnel_3d.gif" width="400" /> 
   </figure>
 </center>
 
