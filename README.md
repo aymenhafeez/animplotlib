@@ -60,7 +60,7 @@ anim.AnimPlot(fig, line, point, y, z, plot_speed=2, l_num=len(x))
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.special as sc
-from animplot3d import AnimPlot3D
+import animplotlib as anim
 
 # generate fresnel data
 x = np.linspace(-7, 7, 1000)
@@ -78,7 +78,7 @@ ax.set_ylim(np.min(y), np.max(y))
 ax.set_zlim(np.min(z), np.max(z))
 ax.set_title("Animated 3D Fresnel Plot")
 
-AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
+anim.AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
 ```
 
 <!-- <center> -->
