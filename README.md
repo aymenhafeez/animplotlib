@@ -80,11 +80,14 @@ ax.set_title("Animated 3D Fresnel Plot")
 
 AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
 ```
-<center>
-  <figure> 
-    <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/fresnel_3d.gif" width="400" /> 
-  </figure>
-</center>
+
+<!-- <center> -->
+<!--   <figure>  -->
+<!--     <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/fresnel_3d.gif" width="400" />  -->
+<!--   </figure> -->
+<!-- </center> -->
+
+![](examples/gifs/fresnel_3d.gif)
 
 ## Documentation
 
