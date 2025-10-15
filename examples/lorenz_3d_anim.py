@@ -9,12 +9,14 @@ beta = 8/3
 x0 = [0, 1, 15]
 t = np.linspace(0.01, 50, 10000)
 
+
 def lorenz(x_var, t):
     x, y, z = x_var
     dx_dt = sigma * (y - x)
     dy_dt = x * (rho - z) - y
     dz_dt = x * y - beta * z
     return [dx_dt, dy_dt, dz_dt]
+
 
 x_solve = odeint(lorenz, x0, t)
 x = x_solve[:, 0]
@@ -32,4 +34,5 @@ ax.set_xlim(np.min(x), np.max(x))
 ax.set_ylim(np.min(y), np.max(y))
 ax.set_zlim(np.min(z), np.max(z))
 
-anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=1, rotation_speed=0.1)
+anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=1,
+                rotation_speed=0.1)

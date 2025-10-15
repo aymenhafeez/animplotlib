@@ -69,26 +69,20 @@ import animplotlib as anim
 x = np.linspace(-7, 7, 1000)
 y, z = sc.fresnel(x)
 
-# create figure and axes - projection='3d' for 3D plots
+# create figure and axes - projection='3d' for 3D plot
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-# line and points to add the data to - three empty lists for 3D data
-lines, = ax.plot([], [], [], lw=1)
-points, = ax.plot([], [], [], 'ro', markersize=5)
+# line and point to add the data to - three empty lists for 3D data
+line, = ax.plot([], [], [], lw=1)
+point, = ax.plot([], [], [], 'ro', markersize=5)
 
 ax.set_xlim(np.min(x), np.max(x))
 ax.set_ylim(np.min(y), np.max(y))
 ax.set_zlim(np.min(z), np.max(z))
 ax.set_title("Animated 3D Fresnel Plot")
 
-anim.AnimPlot3D(fig, ax, [lines], [points], x, y, z, plot_speed=5)
+anim.AnimPlot3D(fig, ax, line, point, x, y, z, plot_speed=5)
 ```
-
-<!-- <center> -->
-<!--   <figure>  -->
-<!--     <img src="https://raw.githubusercontent.com/aymenhafeez/animplotlib/refs/heads/master/examples/gifs/fresnel_3d.gif" width="400" />  -->
-<!--   </figure> -->
-<!-- </center> -->
 
 ![](examples/gifs/fresnel_3d.gif)
 
