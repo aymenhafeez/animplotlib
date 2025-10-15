@@ -87,7 +87,7 @@ AnimPlot3D(fig, ax, line, point, x, y, z, plot_speed=2, l_num=50, blit=False)
 
 Support for multiple subplots in the same figure was recently added. This can
 be done by passing a list for axes, lines, points and the data being plotted.
-See [this post]() for some more advanced examples.
+See [this post](https://aymenhafeez.github.io/animplotlib/) for some more advanced examples.
 
 ---
 
