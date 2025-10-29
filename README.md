@@ -10,13 +10,6 @@ plots.
   </figure>
 </center>
 
-## Features
-
-- Simple animated 2D plots (AnimPlot)
-- Animated 3D plots (AnimPlot3D)
-- Supports multiple subplots/projections
-- Supports regular matplotlib functionality
-
 ## Installation
 
 ```

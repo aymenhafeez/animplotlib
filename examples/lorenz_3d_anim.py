@@ -5,7 +5,7 @@ import animplotlib as anim
 
 sigma = 10
 rho = 28
-beta = 8/3
+beta = 8 / 3
 x0 = [0, 1, 15]
 t = np.linspace(0.01, 50, 10000)
 
@@ -24,15 +24,14 @@ y = x_solve[:, 1]
 z = x_solve[:, 2]
 
 fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = fig.add_subplot(111, projection="3d")
 
-lines, = ax.plot([], [], [], lw=0.5)
-points, = ax.plot([], [], [], 'ro', markersize=4)
+(lines,) = ax.plot([], [], [], lw=0.5)
+(points,) = ax.plot([], [], [], "ro", markersize=4)
 ax.set_title("Lorenz Attractor")
 ax.set_axis_off()
 ax.set_xlim(np.min(x), np.max(x))
 ax.set_ylim(np.min(y), np.max(y))
 ax.set_zlim(np.min(z), np.max(z))
 
-anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=1,
-                rotation_speed=0.1)
+anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=1, rotation_speed=0.1)
