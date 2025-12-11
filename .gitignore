@@ -5,6 +5,7 @@
 .DS_Store
 .vscode/
 __pycache__/
+.mypy_cache/
 
 .venv
 env/
