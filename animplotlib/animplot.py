@@ -1,7 +1,8 @@
-from matplotlib.animation import FuncAnimation, PillowWriter
+import math
+
 import matplotlib.pyplot as plt
 import numpy as np
-import math
+from matplotlib.animation import FuncAnimation, PillowWriter
 
 
 class AnimPlot:
@@ -31,12 +32,28 @@ class AnimPlot:
     **kwargs : dict
         Additional arguments for FuncAnimation.
     """
-    def __init__(self, fig, line, point, x, y, plot_speed=10, l_num=10,
-                 p_num=1, save_as=None, **kwargs):
+
+    def __init__(
+        self,
+        fig,
+        line,
+        point,
+        x,
+        y,
+        plot_speed=10,
+        l_num=10,
+        p_num=1,
+        save_as=None,
+        **kwargs,
+    ):
         self.lines = line if isinstance(line, (list, tuple)) else [line]
         self.points = point if isinstance(point, (list, tuple)) else [point]
-        self.xs = [np.asarray(arr) for arr in (x if isinstance(x, (list, tuple)) else [x])]
-        self.ys = [np.asarray(arr) for arr in (y if isinstance(y, (list, tuple)) else [y])]
+        self.xs = [
+            np.asarray(arr) for arr in (x if isinstance(x, (list, tuple)) else [x])
+        ]
+        self.ys = [
+            np.asarray(arr) for arr in (y if isinstance(y, (list, tuple)) else [y])
+        ]
         self.plot_speed = plot_speed
         self.l_num = l_num
         self.p_num = p_num
@@ -44,13 +61,17 @@ class AnimPlot:
         self.kwargs = kwargs
 
         self.anim = FuncAnimation(
-            fig, self._animate, init_func=self._init,
+            fig,
+            self._animate,
+            init_func=self._init,
             frames=math.ceil(len(self.xs[0]) / self.plot_speed),
-            interval=1, blit=True, **kwargs
+            interval=1,
+            blit=True,
+            **kwargs,
         )
 
         if save_as is not None:
-            self.anim.save(save_as + '.gif', writer=PillowWriter(fps=60))
+            self.anim.save(save_as + ".gif", writer=PillowWriter(fps=60))
         else:
             plt.show()
 
@@ -64,10 +85,10 @@ class AnimPlot:
         end_idx = min(self.plot_speed * (i + 1), len(self.xs[0]))
         artists = []
         for x, y, line, point in zip(self.xs, self.ys, self.lines, self.points):
-            trailing_x = x[max(0, end_idx - self.l_num):end_idx]
-            trailing_y = y[max(0, end_idx - self.l_num):end_idx]
-            current_x = x[end_idx - self.p_num:end_idx]
-            current_y = y[end_idx - self.p_num:end_idx]
+            trailing_x = x[max(0, end_idx - self.l_num) : end_idx]
+            trailing_y = y[max(0, end_idx - self.l_num) : end_idx]
+            current_x = x[end_idx - self.p_num : end_idx]
+            current_y = y[end_idx - self.p_num : end_idx]
             line.set_data(trailing_x, trailing_y)
             point.set_data(current_x, current_y)
             artists.extend([line, point])
