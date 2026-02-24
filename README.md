@@ -82,7 +82,7 @@ anim.AnimPlot3D(fig, ax, line, point, x, y, z, plot_speed=5)
 ## Documentation
 
 * [API Reference](https://github.com/aymenhafeez/animplotlib/blob/master/docs/API.md)
-* [Advanced examples](https://aymenhafeez.github.io/animplotlib/)
+* [Advanced examples](https://aymenhafeez.github.io/posts/2025-10-09-animplotlib/)
 
 ## License
 
