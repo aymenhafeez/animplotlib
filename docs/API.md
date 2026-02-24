@@ -1,7 +1,5 @@
 # animplotlib API Documentation
 
-***
-
 ## Animplot
 
 Class for producing 2D animated plots for one or more projections.
@@ -38,8 +36,6 @@ AnimPlot(fig, line, point, x, y, plot_speed=10, l_num=10, p_num=1, save_as=None,
 from animplotlib import AnimPlot
 AnimPlot(fig, line, point, x, y, plot_speed=2, l_num=50)
 ```
-
-***
 
 ## Animplot3D
 
@@ -84,15 +80,11 @@ from animplotlib import AnimPlot3D
 AnimPlot3D(fig, ax, line, point, x, y, z, plot_speed=2, l_num=50, blit=False)
 ```
 
-***
-
 ## Advanced Usage
 
 Support for multiple subplots in the same figure was recently added. This can
 be done by passing a list for axes, lines, points and the data being plotted.
 See [this post](https://aymenhafeez.github.io/animplotlib/) for some more advanced examples.
-
-***
 
 ## License
 
