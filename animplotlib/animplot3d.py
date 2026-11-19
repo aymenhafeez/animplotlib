@@ -62,7 +62,6 @@ class AnimPlot3D:
     ) -> None:
         self.fig = fig
         self.axes = [ax] if isinstance(ax, Axes3D) else list(ax)
-        self.axes = [ax] if isinstance(ax, Axes3D) else list(ax)
         self.lines = [lines] if isinstance(lines, Line3D) else list(lines)
         self.points = [points] if isinstance(points, Line3D) else list(points)
         self.xs = _series(x)
