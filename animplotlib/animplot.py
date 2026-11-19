@@ -1,8 +1,12 @@
 import math
+from collections.abc import Sequence
 
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.figure import Figure
+from matplotlib.lines import Line2D
+from numpy.typing import ArrayLike
 
 
 def _series(data):
@@ -42,19 +46,19 @@ class AnimPlot:
 
     def __init__(
         self,
-        fig,
-        line,
-        point,
-        x,
-        y,
-        plot_speed=10,
-        l_num=10,
-        p_num=1,
-        save_as=None,
+        fig: Figure,
+        line: Line2D | Sequence[Line2D],
+        point: Line2D | Sequence[Line2D],
+        x: ArrayLike | Sequence[ArrayLike],
+        y: ArrayLike | Sequence[ArrayLike],
+        plot_speed: int = 10,
+        l_num: int = 10,
+        p_num: int = 1,
+        save_as: str | None = None,
         **kwargs,
-    ):
-        self.lines = line if isinstance(line, (list, tuple)) else [line]
-        self.points = point if isinstance(point, (list, tuple)) else [point]
+    ) -> None:
+        self.lines = [line] if isinstance(line, Line2D) else list(line)
+        self.points = [point] if isinstance(point, Line2D) else list(point)
         self.xs = _series(x)
         self.ys = _series(y)
         self.plot_speed = plot_speed

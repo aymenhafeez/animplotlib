@@ -1,8 +1,12 @@
 import math
+from collections.abc import Sequence
 
 import matplotlib.pyplot as plt
-import numpy as np
 from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.figure import Figure
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d.art3d import Line3D
+from numpy.typing import ArrayLike
 
 from .animplot import _series
 
@@ -41,25 +45,26 @@ class AnimPlot3D:
 
     def __init__(
         self,
-        fig,
-        ax,
-        lines,
-        points,
-        x,
-        y,
-        z,
-        plot_speed=10,
-        rotation_speed=0,
-        l_num=0,
-        p_num=1,
-        save_as=None,
-        blit=False,
+        fig: Figure,
+        ax: Axes3D | Sequence[Axes3D],
+        lines: Line3D | Sequence[Line3D],
+        points: Line3D | Sequence[Line3D],
+        x: ArrayLike | Sequence[ArrayLike],
+        y: ArrayLike | Sequence[ArrayLike],
+        z: ArrayLike | Sequence[ArrayLike],
+        plot_speed: int = 10,
+        rotation_speed: int = 0,
+        l_num: int = 0,
+        p_num: int = 1,
+        save_as: str | None = None,
+        blit: bool = False,
         **kwargs,
-    ):
+    ) -> None:
         self.fig = fig
-        self.axes = ax if isinstance(ax, (list, tuple)) else [ax]
-        self.lines = lines if isinstance(lines, (list, tuple)) else [lines]
-        self.points = points if isinstance(points, (list, tuple)) else [points]
+        self.axes = [ax] if isinstance(ax, Axes3D) else list(ax)
+        self.axes = [ax] if isinstance(ax, Axes3D) else list(ax)
+        self.lines = [lines] if isinstance(lines, Line3D) else list(lines)
+        self.points = [points] if isinstance(points, Line3D) else list(points)
         self.xs = _series(x)
         self.ys = _series(y)
         self.zs = _series(z)
