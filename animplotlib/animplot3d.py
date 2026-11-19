@@ -53,7 +53,7 @@ class AnimPlot3D:
         y: ArrayLike | Sequence[ArrayLike],
         z: ArrayLike | Sequence[ArrayLike],
         plot_speed: int = 10,
-        rotation_speed: int = 0,
+        rotation_speed: float | Sequence[float] = 0,
         l_num: int = 0,
         p_num: int = 1,
         save_as: str | None = None,
@@ -70,9 +70,9 @@ class AnimPlot3D:
         self.zs = _series(z)
         self.plot_speed = plot_speed
         self.rotation_speeds = (
-            rotation_speed
-            if isinstance(rotation_speed, (list, tuple))
-            else [rotation_speed] * len(self.axes)
+            [rotation_speed] * len(self.axes)
+            if isinstance(rotation_speed, (int, float))
+            else list(rotation_speed)
         )
         self.l_num = l_num
         self.p_num = p_num
