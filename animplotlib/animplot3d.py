@@ -61,9 +61,9 @@ class AnimPlot3D:
         **kwargs,
     ) -> None:
         self.fig = fig
-        self.axes = [ax] if isinstance(ax, Axes3D) else list(ax)
         self.lines = [lines] if isinstance(lines, Line3D) else list(lines)
         self.points = [points] if isinstance(points, Line3D) else list(points)
+        self.axes = [ax] * len(self.lines) if isinstance(ax, Axes3D) else list(ax)
         self.xs = _series(x)
         self.ys = _series(y)
         self.zs = _series(z)
@@ -79,6 +79,21 @@ class AnimPlot3D:
         self.kwargs = kwargs
 
         kwargs.setdefault("interval", 1)
+
+        if any(
+            len(s) != len(self.lines)
+            for s in (
+                self.points,
+                self.axes,
+                self.rotation_speeds,
+                self.xs,
+                self.ys,
+                self.zs,
+            )
+        ):
+            raise ValueError(
+                "lines, points, axes, rotation speeds and x/y/z data must all have the same number of entries"
+            )
 
         self.anim = FuncAnimation(
             self.fig,

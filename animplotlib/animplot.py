@@ -70,6 +70,11 @@ class AnimPlot:
         kwargs.setdefault("interval", 1)
         kwargs.setdefault("blit", True)
 
+        if any(len(s) != len(self.lines) for s in (self.points, self.xs, self.ys)):
+            raise ValueError(
+                "lines, points, axes, and x/y data must all have the same number of entries"
+            )
+
         self.anim = FuncAnimation(
             fig,
             self._animate,
