@@ -67,13 +67,14 @@ class AnimPlot:
         self.save_as = save_as
         self.kwargs = kwargs
 
+        kwargs.setdefault("interval", 1)
+        kwargs.setdefault("blit", True)
+
         self.anim = FuncAnimation(
             fig,
             self._animate,
             init_func=self._init,
             frames=math.ceil(len(self.xs[0]) / self.plot_speed),
-            interval=1,
-            blit=True,
             **kwargs,
         )
 
