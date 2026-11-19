@@ -5,6 +5,13 @@ import numpy as np
 from matplotlib.animation import FuncAnimation, PillowWriter
 
 
+def _series(data):
+    if np.ndim(data[0]) == 0:
+        data = [data]
+
+    return [np.asarray(arr) for arr in data]
+
+
 class AnimPlot:
     """
     Produces animated 2-D plots for one or more projections.
@@ -48,12 +55,8 @@ class AnimPlot:
     ):
         self.lines = line if isinstance(line, (list, tuple)) else [line]
         self.points = point if isinstance(point, (list, tuple)) else [point]
-        self.xs = [
-            np.asarray(arr) for arr in (x if isinstance(x, (list, tuple)) else [x])
-        ]
-        self.ys = [
-            np.asarray(arr) for arr in (y if isinstance(y, (list, tuple)) else [y])
-        ]
+        self.xs = _series(x)
+        self.ys = _series(y)
         self.plot_speed = plot_speed
         self.l_num = l_num
         self.p_num = p_num

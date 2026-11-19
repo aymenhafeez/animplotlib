@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation, PillowWriter
 
+from .animplot import _series
+
 
 class AnimPlot3D:
     """
@@ -58,15 +60,9 @@ class AnimPlot3D:
         self.axes = ax if isinstance(ax, (list, tuple)) else [ax]
         self.lines = lines if isinstance(lines, (list, tuple)) else [lines]
         self.points = points if isinstance(points, (list, tuple)) else [points]
-        self.xs = [
-            np.asarray(arr) for arr in (x if isinstance(x, (list, tuple)) else [x])
-        ]
-        self.ys = [
-            np.asarray(arr) for arr in (y if isinstance(y, (list, tuple)) else [y])
-        ]
-        self.zs = [
-            np.asarray(arr) for arr in (z if isinstance(z, (list, tuple)) else [z])
-        ]
+        self.xs = _series(x)
+        self.ys = _series(y)
+        self.zs = _series(z)
         self.plot_speed = plot_speed
         self.rotation_speeds = (
             rotation_speed
