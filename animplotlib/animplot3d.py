@@ -32,9 +32,10 @@ class AnimPlot3D:
     rotation_speed : float or list of float, optional
         Rotation speed(s) for each subplot (degrees per data point).
     l_num : int, optional
-        Number of trailing points for the line.
+        Number of trailing points for the line. Defaults to 0 i.e. the whole line
     p_num : int, optional
-        Number of points for the moving point.
+        Number of points for the moving point. Defaults to 1 i.e. the current most
+        point
     blit : bool, optional
         Should be False for 3D plots.
     **kwargs : dict
@@ -94,7 +95,7 @@ class AnimPlot3D:
             self.fig,
             self._animate,
             init_func=self._init,
-            frames=math.ceil(len(self.xs[0]) / self.plot_speed),
+            frames=math.ceil(max(len(x) for x in self.xs) / self.plot_speed),
             blit=blit,
             **kwargs,
         )
@@ -105,8 +106,6 @@ class AnimPlot3D:
         if path.endswith(".gif"):
             kwargs.setdefault("writer", "pillow")
 
-        # default dpi in matplotlib = 100
-        # if no dpi gets set matplotlib uses the figures default dpi (figsize * 100)
         self.anim.save(path, fps=fps, dpi=dpi, **kwargs)
 
     def show(self) -> None:
@@ -118,10 +117,10 @@ class AnimPlot3D:
             line.set_3d_properties([])
             point.set_data([], [])
             point.set_3d_properties([])
+
         return self.lines + self.points
 
     def _animate(self, i):
-        end_idx = min(self.plot_speed * (i + 1), len(self.xs[0]))
         for x, y, z, line, point, ax, rot_speed in zip(
             self.xs,
             self.ys,
@@ -131,11 +130,13 @@ class AnimPlot3D:
             self.axes,
             self.rotation_speeds,
         ):
-            x_vals, y_vals, z_vals = x[:end_idx], y[:end_idx], z[:end_idx]
+            end = min(self.plot_speed * (i + 1), len(x))
+            x_vals, y_vals, z_vals = x[:end], y[:end], z[:end]
             line.set_data(x_vals[-self.l_num :], y_vals[-self.l_num :])
             line.set_3d_properties(z_vals[-self.l_num :])
             point.set_data(x_vals[-self.p_num :], y_vals[-self.p_num :])
             point.set_3d_properties(z_vals[-self.p_num :])
             if rot_speed != 0:
-                ax.view_init(30, rot_speed * end_idx)
+                ax.view_init(30, rot_speed * self.plot_speed * (i + 1))
+
         return self.lines + self.points

@@ -35,9 +35,10 @@ class AnimPlot:
     plot_speed : int, optional
         Number of points to add per frame.
     l_num : int, optional
-        Number of trailing points for the line.
+        Number of trailing points for the line. Defaults to 0 i.e. the whole line
     p_num : int, optional
-        Number of points for the moving point.
+        Number of points for the moving point. Defaults to 1 i.e. the current most
+        point
     **kwargs : dict
         Additional arguments for FuncAnimation.
     """
@@ -74,7 +75,7 @@ class AnimPlot:
             fig,
             self._animate,
             init_func=self._init,
-            frames=math.ceil(len(self.xs[0]) / self.plot_speed),
+            frames=math.ceil(max(len(x) for x in self.xs) / self.plot_speed),
             **kwargs,
         )
 
@@ -84,8 +85,6 @@ class AnimPlot:
         if path.endswith(".gif"):
             kwargs.setdefault("writer", "pillow")
 
-        # default dpi in matplotlib = 100
-        # if no dpi gets set matplotlib uses the figures default dpi (figsize * 100)
         self.anim.save(path, fps=fps, dpi=dpi, **kwargs)
 
     def show(self) -> None:
