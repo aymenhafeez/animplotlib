@@ -3,7 +3,7 @@ from collections.abc import Sequence
 
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.animation import FuncAnimation
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 from numpy.typing import ArrayLike
@@ -38,8 +38,6 @@ class AnimPlot:
         Number of trailing points for the line.
     p_num : int, optional
         Number of points for the moving point.
-    save_as : str or None, optional
-        If set, saves animation as GIF with this name.
     **kwargs : dict
         Additional arguments for FuncAnimation.
     """
@@ -54,7 +52,6 @@ class AnimPlot:
         plot_speed: int = 10,
         l_num: int = 10,
         p_num: int = 1,
-        save_as: str | None = None,
         **kwargs,
     ) -> None:
         self.lines = [line] if isinstance(line, Line2D) else list(line)
@@ -64,8 +61,6 @@ class AnimPlot:
         self.plot_speed = plot_speed
         self.l_num = l_num
         self.p_num = p_num
-        self.save_as = save_as
-        self.kwargs = kwargs
 
         kwargs.setdefault("interval", 1)
         kwargs.setdefault("blit", True)
@@ -83,10 +78,18 @@ class AnimPlot:
             **kwargs,
         )
 
-        if save_as is not None:
-            self.anim.save(save_as + ".gif", writer=PillowWriter(fps=60))
-        else:
-            plt.show()
+    def save(
+        self, path: str, fps: int = 50, dpi: float | None = None, **kwargs
+    ) -> None:
+        if path.endswith(".gif"):
+            kwargs.setdefault("writer", "pillow")
+
+        # default dpi in matplotlib = 100
+        # if no dpi gets set matplotlib uses the figures default dpi (figsize * 100)
+        self.anim.save(path, fps=fps, dpi=dpi, **kwargs)
+
+    def show(self) -> None:
+        plt.show()
 
     def _init(self):
         for line, point in zip(self.lines, self.points):

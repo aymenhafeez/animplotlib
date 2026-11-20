@@ -2,7 +2,7 @@ import math
 from collections.abc import Sequence
 
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.animation import FuncAnimation
 from matplotlib.figure import Figure
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Line3D
@@ -30,13 +30,11 @@ class AnimPlot3D:
     plot_speed : int, optional
         Number of points to add per frame.
     rotation_speed : float or list of float, optional
-        Rotation speed(s) for each subplot (degrees per frame).
+        Rotation speed(s) for each subplot (degrees per data point).
     l_num : int, optional
         Number of trailing points for the line.
     p_num : int, optional
         Number of points for the moving point.
-    save_as : str or None, optional
-        If set, saves animation as GIF with this name.
     blit : bool, optional
         Should be False for 3D plots.
     **kwargs : dict
@@ -56,7 +54,6 @@ class AnimPlot3D:
         rotation_speed: float | Sequence[float] = 0,
         l_num: int = 0,
         p_num: int = 1,
-        save_as: str | None = None,
         blit: bool = False,
         **kwargs,
     ) -> None:
@@ -75,8 +72,6 @@ class AnimPlot3D:
         )
         self.l_num = l_num
         self.p_num = p_num
-        self.save_as = save_as
-        self.kwargs = kwargs
 
         kwargs.setdefault("interval", 1)
 
@@ -104,10 +99,18 @@ class AnimPlot3D:
             **kwargs,
         )
 
-        if save_as is not None:
-            self.anim.save(save_as + ".gif", writer=PillowWriter(fps=60))
-        else:
-            plt.show()
+    def save(
+        self, path: str, fps: int = 50, dpi: float | None = None, **kwargs
+    ) -> None:
+        if path.endswith(".gif"):
+            kwargs.setdefault("writer", "pillow")
+
+        # default dpi in matplotlib = 100
+        # if no dpi gets set matplotlib uses the figures default dpi (figsize * 100)
+        self.anim.save(path, fps=fps, dpi=dpi, **kwargs)
+
+    def show(self) -> None:
+        plt.show()
 
     def _init(self):
         for line, point in zip(self.lines, self.points):
