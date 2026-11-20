@@ -1,7 +1,7 @@
+from animplotlib import AnimPlot
 import numpy as np
 import matplotlib.pyplot as plt
 from mpmath import zeta
-import animplotlib as anim
 
 x, y = [], []
 n_upper = 49
@@ -14,11 +14,11 @@ for k in np.arange(0, n_upper, 0.01):
 fig = plt.figure()
 ax = fig.add_subplot(111)
 
-line, = ax.plot([], [], c='black',lw=3)
-point, = ax.plot([], [], '.', markersize=5)
+line = ax.plot([], [], lw=1)
+point = ax.plot([], [], "o", markersize=5)
 
 ax.set_xlim(-2, 5)
 ax.set_ylim(-3, 3)
-ax.set_axis_off()
 
-anim.AnimPlot(fig, line, point, x, y, plot_speed=1)
+a = AnimPlot(fig, line, point, x, y, plot_speed=1)
+a.show()

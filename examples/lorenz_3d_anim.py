@@ -1,4 +1,4 @@
-import animplotlib as anim
+from animplotlib import AnimPlot3D
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import odeint
@@ -33,4 +33,5 @@ ax.set_xlim(np.min(x), np.max(x))
 ax.set_ylim(np.min(y), np.max(y))
 ax.set_zlim(np.min(z), np.max(z))
 
-anim.AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=3, rotation_speed=0.1)
+a = AnimPlot3D(fig, ax, lines, points, x, y, z, plot_speed=3, rotation_speed=0.1)
+a.show()

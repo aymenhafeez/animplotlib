@@ -1,4 +1,4 @@
-import animplotlib as anim  # type: ignore
+from animplotlib import AnimPlot3D
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import odeint
@@ -23,7 +23,6 @@ colours = [
     "#F28E2B",
 ]
 
-# x0 = [(10.0, 10.0, 10.0), (15.0, 10.0, 20.0), (-15.0, -10.0, 30.0), (5.0, -20.0, 40.0)]
 epsilon = 1e-5
 x0 = [(10.0, 10.0, 10.0 + n * epsilon) for n in range(len(colours))]
 
@@ -56,7 +55,7 @@ for init_cond, colour in zip(x0, colours):
     ys.append(y)
     zs.append(z)
     (line,) = ax.plot([], [], [], lw=2, color=colour)
-    (point,) = ax.plot([], [], [], "o", color=colour, markersize=0)
+    (point,) = ax.plot([], [], [], "o", color=colour, markersize=10)
     lines.append(line)
     points.append(point)
 
@@ -65,17 +64,17 @@ ax.set_ylim(np.min(ys), np.max(ys))
 ax.set_zlim(np.min(zs), np.max(zs))
 plt.tight_layout()
 
-anim.AnimPlot3D(
+a = AnimPlot3D(
     fig,
-    [ax] * len(lines),
+    ax,
     lines,
     points,
     xs,
     ys,
     zs,
-    plot_speed=5,
+    plot_speed=2,
     rotation_speed=0.1,
     l_num=150,
     p_num=1,
-    # save_as="lorenz_colour",
 )
+a.show()

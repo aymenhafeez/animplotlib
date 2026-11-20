@@ -1,9 +1,9 @@
-import animplotlib as anim
+from animplotlib import AnimPlot3D
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import odeint
 
-t = np.linspace(0.01, 75, 15000)
+t = np.linspace(0.01, 50, 10000)
 colours = [
     "#4E79A7",
     "#F28E2B",
@@ -39,7 +39,7 @@ def solve_dadras(x0, t, a, b, c, d, e):
     return odeint(dadras, x0, t, args=(a, b, c, d, e))
 
 
-plt.style.use(("dark_background"))
+plt.style.use("dark_background")
 fig = plt.figure(figsize=(7, 7))
 ax = fig.add_subplot(111, projection="3d")
 
@@ -54,7 +54,7 @@ for init_cond, colour in zip(x0, colours):
     ys.append(y)
     zs.append(z)
     (line,) = ax.plot([], [], [], lw=2, c=colour)
-    (point,) = ax.plot([], [], [], "o", c=colour, markersize=0)
+    (point,) = ax.plot([], [], [], "o", c=colour, markersize=10)
     lines.append(line)
     points.append(point)
 
@@ -64,17 +64,19 @@ ax.set_zlim(np.min(zs), np.max(zs))
 ax.set_axis_off()
 plt.tight_layout()
 
-anim.AnimPlot3D(
+a = AnimPlot3D(
     fig,
-    [ax] * len(lines),
+    ax,
     lines,
     points,
     xs,
     ys,
     zs,
-    plot_speed=13,
+    plot_speed=5,
     rotation_speed=0.05,
     l_num=350,
     p_num=1,
-    # save_as="dadras_multi",
 )
+
+# a.save("dadras_anim.mp4", dpi=200)
+a.show()
