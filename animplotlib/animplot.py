@@ -50,7 +50,7 @@ class AnimPlot:
         x: ArrayLike | Sequence[ArrayLike],
         y: ArrayLike | Sequence[ArrayLike],
         plot_speed: int = 10,
-        l_num: int = 10,
+        l_num: int = 0,
         p_num: int = 1,
         **kwargs,
     ) -> None:
@@ -95,17 +95,14 @@ class AnimPlot:
         for line, point in zip(self.lines, self.points):
             line.set_data([], [])
             point.set_data([], [])
+
         return self.lines + self.points
 
     def _animate(self, i):
-        end_idx = min(self.plot_speed * (i + 1), len(self.xs[0]))
-        artists = []
         for x, y, line, point in zip(self.xs, self.ys, self.lines, self.points):
-            trailing_x = x[max(0, end_idx - self.l_num) : end_idx]
-            trailing_y = y[max(0, end_idx - self.l_num) : end_idx]
-            current_x = x[end_idx - self.p_num : end_idx]
-            current_y = y[end_idx - self.p_num : end_idx]
-            line.set_data(trailing_x, trailing_y)
-            point.set_data(current_x, current_y)
-            artists.extend([line, point])
-        return artists
+            end = min(self.plot_speed * (i + 1), len(x))
+            x_vals, y_vals = x[:end], y[:end]
+            line.set_data(x_vals[-self.l_num :], y_vals[-self.l_num :])
+            point.set_data(x_vals[-self.p_num :], y_vals[-self.p_num :])
+
+        return self.lines + self.points
