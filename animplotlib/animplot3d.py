@@ -37,7 +37,7 @@ class AnimPlot3D:
         Number of points for the moving point. Defaults to 1 i.e. the current most
         point
     blit : bool, optional
-        Should be False for 3D plots.
+        If True, only redraw the parts of the figure that change on update. Defaults to False
     **kwargs : dict
         Additional arguments for FuncAnimation.
     """
