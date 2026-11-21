@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setup(
     name="animplotlib",
-    version="0.2.6",
+    version="0.3.0",
     author="Aymen Hafeez",
     author_email="aymennh@gmail.com",
     packages=find_packages(),
@@ -15,6 +15,6 @@ setup(
     description="A thin wrapper around the matplotlib FuncAnimation class",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    python_requires=">=3.7",
-    install_requires=["matplotlib >= 1.1"],
+    python_requires=">=3.10",
+    install_requires=["matplotlib>=3.8", "numpy"],
 )
